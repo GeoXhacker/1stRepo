@@ -1,0 +1,41 @@
+<html>
+    <body>
+        <h1>Login into account</h1>
+        <form>
+            <input placeholder='Username' id='un'/>
+            <br>
+            <input placeholder='Password' id='pw' type='password' />
+            <br>
+        </form>
+        <p id='alert'></p>
+        <button id='button' onclick="submit()">Login</button>
+        <script>
+            function submit(){
+                fetch('http://localhost:3000/users/login', { 
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        username: document.getElementById('un').value, 
+                        pw: document.getElementById('pw').value
+                    })
+                }).then((res) => {
+                    return res.json()
+                }).then((data) => {
+                    alertUser(data.msg)
+                }).catch(()=>{
+                    alertUser("Can't connect to server")
+                })
+            }
+
+            function alertUser(_msg) {
+                let msg = document.getElementById('alert')
+                msg.innerHTML = _msg;
+                setTimeout(() => {
+                    msg.innerHTML = ''    
+                }, 2000);
+            }
+        </script>
+    </body>
+</html>
