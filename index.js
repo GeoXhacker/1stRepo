@@ -6,10 +6,6 @@ const app = express()
 const port = 3000
 let userRouter = require('./routes')
 
-// app.get('/', (req, res) => {
-//   res.send('Hello World!')
-// })
-
 
 let rootDir = path.join(__dirname, 'www');
 app.use(bodyParser.urlencoded({
